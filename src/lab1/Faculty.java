@@ -8,14 +8,16 @@ public class Faculty {
 
     private String name;
     private String abbreviation;
-    private List<Student> studentsList;
+    private List<Student> studentsList=new ArrayList<>();
     private StudyField studyField;
-    static List<Faculty> allFaculties;
+    public static List<Faculty> allFaculties=new ArrayList<>();
 
-    public Faculty(String name, String abbreviation, StudyField studyField) {
+    public Faculty(){allFaculties.add(this);};
+
+    public Faculty(String name, String abbreviation, String studyField) {
         this.name = name;
         this.abbreviation = abbreviation;
-        this.studyField = studyField;
+        this.studyField = StudyField.valueOf(studyField);
         allFaculties.add(this);
     }
 
@@ -47,9 +49,11 @@ public class Faculty {
         return studyField;
     }
 
-    public void setStudyField(StudyField studyField) {
-        this.studyField = studyField;
+    public void setStudyField(String studyField) {
+        this.studyField = StudyField.valueOf(studyField);
     }
+
+
 
     public List<Student> getEnrolledStudents(){
         Iterator<Student> iterator=studentsList.iterator();
@@ -76,6 +80,8 @@ public class Faculty {
     }
 
 
+
+
     public boolean hasStudent(Student student){
         Iterator<Student> iterator=studentsList.iterator();
         while (iterator.hasNext()){
@@ -86,20 +92,62 @@ public class Faculty {
         return false;
     }
 
-    public List<Faculty> getAllFaculties(){
+    public void addStudent( Student student){
+        studentsList.add(student);
+    }
+
+
+
+    public static List<Faculty> getAllFaculties(){
         return allFaculties;
     }
 
-    public List<Faculty> getFacultiesByField(StudyField field){
+    public static List<Faculty> getFacultiesByField(String field){
         List<Faculty> filteredFaculties=new ArrayList<>();
         Iterator<Faculty> iterator=Faculty.allFaculties.iterator();
         while (iterator.hasNext()){
             Faculty faculty=iterator.next();
-            if (faculty.studyField==field){
+            String studyField= String.valueOf(faculty.studyField);
+            if (studyField.equals(field)){
                 filteredFaculties.add(faculty);
             }
         }
         return filteredFaculties;
     }
+
+
+
+    public static Faculty getFacultyByStudentEmail(String email){
+        Student student=Student.getStudentByEmail(email);//Studentul il citeste cum trebuie
+        if (student==null) return null;
+        List<Faculty>faculties = Faculty.allFaculties;//Why the recordings are doubled in allFaculties
+        Iterator<Faculty> iterator=faculties.iterator();
+        while (iterator.hasNext()){
+            Faculty faculty=iterator.next();
+
+            if(faculty.hasStudent(student)){
+                return faculty;
+            }
+        }
+        return null;
+    }
+
+    public static Faculty getFacultyByAbreviation(String abreviation){
+        Iterator<Faculty> iterator=Faculty.allFaculties.iterator();
+        while (iterator.hasNext()){
+            Faculty faculty=iterator.next();
+            if (abreviation.equals(faculty.abbreviation)){
+                return faculty;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String toString(){
+        return this.abbreviation+" - "+ this.name;
+    }
+
+
 
 }

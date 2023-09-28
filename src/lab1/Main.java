@@ -1,7 +1,21 @@
 package lab1;
 
-public class Main {
-    public static void main(String[] args) {
+import lab1.file_manager.FacultyManager;
+import lab1.file_manager.StudentManager;
+import lab1.operations.WelcomeOperations;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
+
+public class Main {
+
+    public static void main(String[] args) throws FileNotFoundException {
+        FacultyManager facultyManager = new FacultyManager();
+        StudentManager studentManager = new StudentManager();
+        facultyManager.readRecordings(new File("src/lab1/faculties.txt"), "/");
+        studentManager.readRecordings(new File("src/lab1/students.txt"), "/");
+
+        new WelcomeOperations();
     }
 }
