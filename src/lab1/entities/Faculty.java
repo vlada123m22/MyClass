@@ -1,4 +1,4 @@
-package lab1;
+package lab1.entities;
 
 import java.util.ArrayList;
 import java.util.Iterator;

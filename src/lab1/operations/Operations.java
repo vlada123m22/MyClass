@@ -6,16 +6,12 @@ abstract class Operations {
     String choice;
     String message;
 
-    public Operations(){
-        this.displayMessage();
-        this.getInput();
-    }
 
     public abstract void displayMessage();
-    public abstract void getInput();
+
+    public abstract void getInput(String[] tokens);
+
     public abstract void executeChoice();
-
-
 
 
 }

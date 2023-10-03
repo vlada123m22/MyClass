@@ -1,6 +1,6 @@
 package lab1.file_manager;
 
-import lab1.Faculty;
+import lab1.entities.Faculty;
 
 import java.io.File;
 import java.io.FileNotFoundException;

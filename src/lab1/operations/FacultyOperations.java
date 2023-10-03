@@ -1,22 +1,21 @@
 package lab1.operations;
 
-import lab1.Faculty;
-import lab1.Student;
+import lab1.entities.Faculty;
+import lab1.entities.Student;
 import lab1.file_manager.StudentManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
 public class FacultyOperations extends Operations{
 String[] choiceTokens;
-public FacultyOperations(){
-    super();
-}
     @Override
     public void displayMessage() {
         message= """
+
+
+
                 Faculty operations
                 What do you want to do?
                 
@@ -33,10 +32,7 @@ public FacultyOperations(){
     }
 
     @Override
-    public void getInput()  {
-        Scanner scanner = new Scanner(System.in);
-        String choice = scanner.nextLine();
-        String[] tokens = choice.split("/");
+    public void getInput(String[] tokens)  {
         if (tokens[0].equals("ns") || tokens[0].equals("gs")||tokens[0].equals("ds")||tokens[0].equals("dg")||tokens[0].equals("bf")||tokens[0].equals("b")||tokens[0].equals("q")) {
             this.choice = tokens[0];
             this.choiceTokens = tokens;
@@ -44,7 +40,6 @@ public FacultyOperations(){
         }
         else {
             System.out.println("Incorrect input!Try one more time!");
-            this.getInput();
         }
     }
 
@@ -54,11 +49,12 @@ public FacultyOperations(){
             case "ns" -> {
                 String abreviation = choiceTokens[1];
                 Faculty faculty = Faculty.getFacultyByAbreviation(abreviation);
+                Student student = new Student();
+                student.setFirstName(choiceTokens[2]);
+                student.setLastName(choiceTokens[3]);
+                student.setEmail(choiceTokens[4]);
+                student.setDateOfBirth(choiceTokens[5], choiceTokens[6], choiceTokens[7]);
 
-                int birthYear = Integer.parseInt(choiceTokens[5]);
-                int birthMonth = Integer.parseInt(choiceTokens[6]);
-                int birthDay = Integer.parseInt(choiceTokens[7]);
-                Student student = new Student(choiceTokens[2], choiceTokens[3], choiceTokens[4], birthYear, birthMonth, birthDay);
                 student.setFacultyAbreviation(faculty.getAbbreviation());
                 StudentManager sm=new StudentManager();
                 try {
@@ -67,14 +63,13 @@ public FacultyOperations(){
                     System.out.println("The file students.txt does not exist at the indicated path or cannot be read");
                 }
                 System.out.println("Student added");
-                this.getInput();
+
             }
             case "gs" -> {
                 String email = choiceTokens[1];
                 Student student = Student.getStudentByEmail(email);
                 student.setGraduated(true);
                 System.out.println("Student "+email+" setted as graduated");
-                this.getInput();
             }
             case "ds" -> {
                 String abbreviation = choiceTokens[1];
@@ -84,7 +79,6 @@ public FacultyOperations(){
                         enrolled) {
                     System.out.println(s.toString());
                 }
-                this.getInput();
             }
             case "dg" -> {
                 String abbreviation = choiceTokens[1];
@@ -94,7 +88,6 @@ public FacultyOperations(){
                         graduates) {
                     System.out.println(g.toString());
                 }
-                this.getInput();
             }
             case "bf" -> {
                 String abbreviation = choiceTokens[1];
@@ -103,12 +96,10 @@ public FacultyOperations(){
                 Student student = Student.getStudentByEmail(email);
                 if (faculty.hasStudent(student)) System.out.println("The student belongs to this faculty");
                 else System.out.println("The student doesn't belong to this faculty");
-                this.getInput();
             }
             case "b" -> {
-                new WelcomeOperations();
+                ApplicationLoop.currentOpperation=0;
             }
-            case "q" -> System.out.println("Quited the program");
         }
     }
 }

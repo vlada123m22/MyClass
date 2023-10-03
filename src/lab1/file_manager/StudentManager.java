@@ -1,7 +1,6 @@
 package lab1.file_manager;
 
-import lab1.Faculty;
-import lab1.Student;
+import lab1.entities.Student;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,8 +18,8 @@ public class StudentManager implements FileManager{
             student.setFirstName(recording[0]);
             student.setLastName(recording[1]);
             student.setEmail(recording[2]);
-            student.setDateOfBirth(recording[3],recording[4],recording[5]);
             student.setEnrolementDate(recording[6], recording[7], recording[8]);
+            student.setDateOfBirth(recording[3],recording[4],recording[5]);
             student.setFacultyAbreviation(recording[9]);
             student.setGraduated(Boolean.parseBoolean(recording[10]));
         }

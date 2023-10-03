@@ -4,15 +4,13 @@ import java.util.Scanner;
 
 public class WelcomeOperations extends Operations{
 
-
-
-    public WelcomeOperations(){
-        super();
-    }
-
     @Override
     public void displayMessage() {
         message= """
+                
+                
+                
+                
                 Welcome to TUM's management system! What do you want to do?
                 
                 g - general operations
@@ -26,10 +24,9 @@ public class WelcomeOperations extends Operations{
     }
 
     @Override
-    public void getInput() {
-        Scanner scanner = new Scanner(System.in);
-        String choice = scanner.nextLine();
-        if (choice.equals("g") || choice.equals("f")||choice.equals("s")||choice.equals("q")) {
+    public void getInput(String[] tokens) {
+        String choice=tokens[0];
+        if (choice.equals("g") || choice.equals("f")||choice.equals("s")) {
             this.choice = choice;
             this.executeChoice();
 
@@ -39,28 +36,24 @@ public class WelcomeOperations extends Operations{
             this.executeChoice();
         }
 
+//        TODO close scanner
     }
 
     @Override
     public void executeChoice() {
         switch (choice) {
             case "g" -> {
-                GeneralOperations generalOperations = new GeneralOperations();
-                generalOperations.getInput();
+                ApplicationLoop.currentOpperation=1;
             }
             case "f" -> {
-                FacultyOperations facultyOperations = new FacultyOperations();
-                facultyOperations.getInput();
+                ApplicationLoop.currentOpperation=2;
             }
 
             case "s"->{
 
                 System.out.println("Student operations not defined yet!!!");
-                this.displayMessage();
-                this.getInput();
             }
 
-            case "q" -> System.out.println("Quited the program");
         }
     }
 

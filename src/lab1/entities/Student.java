@@ -1,4 +1,4 @@
-package lab1;
+package lab1.entities;
 
 
 import java.util.*;
@@ -18,10 +18,10 @@ public static List<Student> allstudents=new ArrayList<>();
 public Student(){allstudents.add(this);}
 
 public Student( String firstName, String lastName, String email, int birthDay, int birthMonth, int birthYear) {
-        this.firstName = firstName;
-        this.lastName=lastName;
-        this.email=email;
-        this.dateOfBirth=new Date(birthYear,birthMonth, birthDay);
+//        this.firstName = firstName;
+//        this.lastName=lastName;
+//        this.email=email;
+//        this.dateOfBirth=new Date(birthYear,birthMonth, birthDay);
         allstudents.add(this);
     }
 
@@ -54,7 +54,7 @@ public Student( String firstName, String lastName, String email, int birthDay, i
         this.enrolementDate=new Date();
     }
     int date = this.enrolementDate.getDate();
-    int month =this.enrolementDate.getMonth();
+    int month =this.enrolementDate.getMonth()+1;
     int year = this.enrolementDate.getYear()+1900;
         return date+delimiter+month+delimiter+year;
 
@@ -62,7 +62,7 @@ public Student( String firstName, String lastName, String email, int birthDay, i
 
     public String getDateOfBirth(String delimiter) {
         int date = this.dateOfBirth.getDate();
-        int month =this.dateOfBirth.getMonth();
+        int month =this.dateOfBirth.getMonth()+1;
         int year = this.dateOfBirth.getYear()+1900;
         return date+delimiter+month+delimiter+year;
 
@@ -110,16 +110,16 @@ public Student( String firstName, String lastName, String email, int birthDay, i
             }
         }
 
-        this.dateOfBirth=new Date(year,month,day);
+        this.dateOfBirth=new Date(year-1900,month,day);
     }
     else System.out.println("ERROR! Introduced inexisting month for student "+this.email);
 
     }
 
-    public void setEnrolementDate(String birthDay, String birthMonth, String birthYear){
-        int day=Integer.parseInt(birthDay);
-        int month = Integer.parseInt(birthMonth)-1;
-        int year=Integer.parseInt(birthYear);
+    public void setEnrolementDate(String enrollmentDate, String enrollmentMonth, String enrollmentYear){
+        int day=Integer.parseInt(enrollmentDate);
+        int month = Integer.parseInt(enrollmentMonth)-1;
+        int year=Integer.parseInt(enrollmentYear);
         if (year<1950||year>2050){
             System.out.println("Warning! The year "+year+" might not have been introduced correctly the enrollment year for student "+this.email);
         }

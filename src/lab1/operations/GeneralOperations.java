@@ -1,7 +1,7 @@
 package lab1.operations;
 
-import lab1.Faculty;
-import lab1.Student;
+import lab1.entities.Faculty;
+import lab1.entities.Student;
 import lab1.file_manager.FacultyManager;
 
 import java.io.File;
@@ -11,13 +11,13 @@ import java.util.Scanner;
 
 public class GeneralOperations extends Operations{
     String[] choiceTokens;
-
-    public GeneralOperations(){
-        super();
-    }
     @Override
     public void displayMessage() {
         message = """
+                
+                
+                
+                
                 General operations
                 What do you want to do?
 
@@ -34,10 +34,7 @@ public class GeneralOperations extends Operations{
     }
 
     @Override
-    public void getInput()  {
-        Scanner scanner = new Scanner(System.in);
-        String choice = scanner.nextLine();
-        String[] tokens= choice.split("/");
+    public void getInput(String [] tokens)  {
 
         if (tokens[0].equals("nf") || tokens[0].equals("ss")||tokens[0].equals("df")||tokens[0].equals("b")||tokens[0].equals("q")){
             this.choice = tokens[0];
@@ -46,7 +43,6 @@ public class GeneralOperations extends Operations{
         }
         else {
             System.out.println("Incorrect input!Try one more time!");
-            this.getInput();
         }
     }
 
@@ -62,14 +58,12 @@ public class GeneralOperations extends Operations{
                     System.out.println("The file faculties.txt doesn't exist at the indicated path, or it's impossible to read it");
                 }
                 System.out.println("New faculty created");
-                this.getInput();
             }
             case "ss" -> {
                 String email = choiceTokens[1];
                 Student student = Student.getStudentByEmail(email);
                 Faculty faculty = Faculty.getFacultyByStudentEmail(email);
                 System.out.println("Student: " + student.toString() + "from faculty: " + faculty.toString() + "\n");
-                this.getInput();
             }
             case "df" -> {
                 try {
@@ -78,20 +72,18 @@ public class GeneralOperations extends Operations{
                             faculties) {
                         System.out.println(f.toString());
                     }
-                } catch (ArrayIndexOutOfBoundsException e){
+                } catch (ArrayIndexOutOfBoundsException e){ //If after "df" the name of the field is not present then an ArrayOutOfBoundException will be thrown
                     List<Faculty> faculties = Faculty.getAllFaculties();
                     for (Faculty f :
                             faculties) {
                         System.out.println(f.toString());
                     }
-                }finally {
-                    this.getInput();
                 }
             }
             case "b" -> {
-                new WelcomeOperations();
+                ApplicationLoop.currentOpperation=0;
             }
-            case "q" -> System.out.println("Quited the program");
+            default -> System.out.println("Incorrect input! Try one more time!");
         }
 
     }
