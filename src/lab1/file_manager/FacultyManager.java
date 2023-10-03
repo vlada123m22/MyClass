@@ -27,8 +27,8 @@ public class FacultyManager implements FileManager {
     @Override
     public void addRecording(Object recording, File file, String delimiter) throws IOException {
         Faculty faculty= (Faculty) recording;
-        FileWriter writer=new FileWriter(file);
-        writer.write(faculty.getName()+delimiter+faculty.getAbbreviation()+delimiter+faculty.getStudyField().toString()); //Check if faculty.getStudyField().toString() doesn't give incorrect output
+        FileWriter writer=new FileWriter(file, true);
+        writer.write(faculty.getName()+delimiter+faculty.getAbbreviation()+delimiter+faculty.getStudyField().toString()+"/n"); //Check if faculty.getStudyField().toString() doesn't give incorrect output
         writer.close();
     }
 }

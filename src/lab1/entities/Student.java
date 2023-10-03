@@ -17,13 +17,6 @@ public static List<Student> allstudents=new ArrayList<>();
 
 public Student(){allstudents.add(this);}
 
-public Student( String firstName, String lastName, String email, int birthDay, int birthMonth, int birthYear) {
-//        this.firstName = firstName;
-//        this.lastName=lastName;
-//        this.email=email;
-//        this.dateOfBirth=new Date(birthYear,birthMonth, birthDay);
-        allstudents.add(this);
-    }
 
     public String getFirstName() {
         return firstName;

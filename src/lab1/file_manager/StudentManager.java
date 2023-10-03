@@ -33,7 +33,7 @@ public class StudentManager implements FileManager{
         FileWriter writer=new FileWriter(file,true);
         String birthDate=student.getDateOfBirth(delimiter);
         String enrollmentDate=student.getEnrolementDate(delimiter);
-        writer.write("\n"+student.getFirstName()+delimiter+student.getLastName()+delimiter+student.getEmail()+delimiter+enrollmentDate+delimiter+birthDate+delimiter+student.getFacultyAbreviation()+delimiter+String.valueOf(student.isGraduated()));
+        writer.write(student.getFirstName()+delimiter+student.getLastName()+delimiter+student.getEmail()+delimiter+enrollmentDate+delimiter+birthDate+delimiter+student.getFacultyAbreviation()+delimiter+String.valueOf(student.isGraduated())+"/n");
         writer.close();
     }
 }
