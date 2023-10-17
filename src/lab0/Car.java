@@ -1,4 +1,5 @@
 package lab0;
+///dgakhclajchkasjhkjhcaksjdxkjsa
 
 public class Car {
     private float speed = 0;

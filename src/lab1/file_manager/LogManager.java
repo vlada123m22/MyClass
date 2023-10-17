@@ -12,7 +12,7 @@ public class LogManager{
     public void addLog(String opperation, File file) throws IOException {
         FileWriter writer=new FileWriter(file, true);
         Date currentDate=new Date();
-        writer.write(opperation+"                      " +currentDate.toString()+"/n");
+        writer.write(opperation+"                      " +currentDate.toString()+"\n");
         writer.close();
     }
 }

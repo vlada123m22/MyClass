@@ -20,7 +20,7 @@ public class Main {
         StudentManager studentManager = new StudentManager();
         facultyManager.readRecordings(new File("src/lab1/faculties.txt"), "/");
         studentManager.readRecordings(new File("src/lab1/students.txt"), "/");
-        new ApplicationLoop();
-
+        ApplicationLoop loop = new ApplicationLoop();
+        loop.run();
     }
 }

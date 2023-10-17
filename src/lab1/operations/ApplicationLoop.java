@@ -9,12 +9,17 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ApplicationLoop {
-    private Scanner scanner = new Scanner(System.in);
+    private Scanner scanner;
     private String input;
     private String [] inputTokens;
     private LogManager logManager = new LogManager();
     static int currentOpperation=0;//0-welcome, 1- general, 2- faculty
+
     public ApplicationLoop() {
+         this.scanner = new Scanner(System.in);
+    }
+
+    public void run() {
         executeOpperation(new WelcomeOperations());
 
         while (!inputTokens[0].equals("q")) {
