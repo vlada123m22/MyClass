@@ -24,16 +24,17 @@ public class ApplicationLoop extends Thread {
     }
 
     public void executeCommands() throws IOException {
-        boolean flag=true;
 
-        while (flag) {
+        while (true) {
             Commands commands = new Commands();
             Scanner scanner = new Scanner(System.in);
             this.command = scanner.nextLine();
             switch (command) {
                 case "commit" -> Commands.commit();
                 case "status" -> commands.status();
-                case "quit" -> flag=false;
+                case "quit" -> {
+                    System.exit(0);
+                }
                 default -> {
                     String [] commandTokens = command.split(" ");
                     if (commandTokens.length != 2 ){
